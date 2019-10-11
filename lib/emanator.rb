@@ -52,8 +52,10 @@ module Emanator
     end
 
     def process(change_data)
+      tx = [change_data.txid, @target]
       [
-        ["UPDATE emanator_progress SET txid = #{change_data.txid}", []],
+        ['INSERT OR IGNORE INTO emanator_progress(txid, view) VALUES(?, ?)', tx],
+        ['UPDATE emanator_progress SET txid = ? WHERE view = ?', tx],
         *change_data.changes.map { |change| operation(change) }
       ].compact
     end

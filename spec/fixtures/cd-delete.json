@@ -1,0 +1,31 @@
+{
+  "txId": 1234,
+  "change": [
+    {
+      "kind": "insert",
+      "schema": "public",
+      "table": "table2_with_pk",
+      "columnnames": ["a", "b", "c"],
+      "columntypes": ["integer", "character varying(30)", "timestamp without time zone"],
+      "columnvalues": [1, "Backup and Restore", "2018-03-27 12:05:29.914496"]
+    },
+    {
+      "kind": "insert",
+      "schema": "public",
+      "table": "table2_with_pk",
+      "columnnames": ["a", "b", "c"],
+      "columntypes": ["integer", "character varying(30)", "timestamp without time zone"],
+      "columnvalues": [3, "Replication", "2018-03-27 12:05:29.914496"]
+    },
+    {
+      "kind": "delete",
+      "schema": "public",
+      "table": "table2_with_pk",
+      "oldkeys": {
+        "keynames": ["a", "c"],
+        "keytypes": ["integer", "timestamp without time zone"],
+        "keyvalues": [1, "2018-03-27 12:05:29.914496"]
+      }
+    }
+  ]
+}

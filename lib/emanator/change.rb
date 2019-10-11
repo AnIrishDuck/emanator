@@ -22,7 +22,7 @@ module Emanator
           change['columnnames'].zip(change['columnvalues']).to_h
         when DELETE
           old = change['oldkeys']
-          old['keynames'].zip(change['keyvalues']).to_h
+          old['keynames'].zip(old['keyvalues']).to_h
         end
       )
 

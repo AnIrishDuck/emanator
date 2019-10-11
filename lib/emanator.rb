@@ -32,14 +32,23 @@ module Emanator
         tables = expr.from_clause.tables
         raise ArugmentError unless tables.size == 1
         return nil unless change.table == tables.first.name
-        insert(query.list.columns, change)
+        run_row(query.list.columns, change)
       end
     end
 
-    def insert(columns, change)
-      wildcards = columns.map { '?' }.join(',')
-      values = columns.map { |c| change.columns[c.name] }
-      ["INSERT INTO #{@target} VALUES (#{wildcards})", values]
+    def run_row(columns, change)
+      case change.kind
+      when Change::INSERT
+        wildcards = columns.map { '?' }.join(',')
+        values = columns.map { |c| change.columns[c.name] }
+        ["INSERT INTO #{@target} VALUES (#{wildcards})", values]
+      when Change::DELETE
+        names = columns.map(&:name)
+        active = change.columns.keys.select { |k| names.include? k }
+        wildcards = active.map { |name| "#{name} = ?" }.join(' AND ')
+        values = active.map { |name| change.columns[name] }
+        ["DELETE FROM #{@target} WHERE (#{wildcards})", values]
+      end
     end
 
     def process(change_data)

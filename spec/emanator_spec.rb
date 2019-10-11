@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require 'emanator'
-require 'emanator/change_data'
-require 'emanator/change'
-
 RSpec.describe Emanator do
   it 'has a version number' do
     expect(Emanator::VERSION).not_to be nil

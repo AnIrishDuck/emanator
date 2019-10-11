@@ -24,10 +24,10 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'sql-parser', '~> 0.0.2'
   spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'sqlite3', '~> 1.4.1'
   spec.add_development_dependency 'pry-byebug', '~> 3.7.0'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rubocop', '~> 0.65'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.32'
+  spec.add_development_dependency 'sqlite3', '~> 1.4.1'
 end

@@ -5,6 +5,8 @@ require 'emanator/change_data'
 require 'emanator/change'
 
 module Emanator
+  ##
+  # Defines a replica with a target table and sql view.
   class Replica
     def initialize(target, view)
       @target = target
@@ -17,6 +19,7 @@ module Emanator
       case @ast
       when SQLParser::Statement::DirectSelect
         raise ArgumentError unless @ast.order_by.nil?
+
         select(@ast.query_expression, change)
       else
         raise ArgumentError
@@ -29,9 +32,12 @@ module Emanator
         expr = query.table_expression
         blank = [expr.where_clause, expr.group_by_clause, expr.having_clause]
         raise ArgumentError unless blank.all?(&:nil?)
+
         tables = expr.from_clause.tables
         raise ArugmentError unless tables.size == 1
+
         return nil unless change.table == tables.first.name
+
         run_row(query.list.columns, change)
       end
     end

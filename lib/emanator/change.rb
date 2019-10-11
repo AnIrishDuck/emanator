@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Emanator
+  ##
+  # An individual change present within a larger changeset
   class Change
     INSERT = 1
     DELETE = 2

@@ -3,6 +3,8 @@
 require 'json'
 
 module Emanator
+  ##
+  # A changeset (transaction)
   class ChangeData
     attr_reader :txid, :changes
 
